@@ -124,6 +124,10 @@ void save_contact(std::vector<Contact>& save_contact){
 */
 void delete_contact(std::vector<Contact>& delete_contact){
     int choise = 0;
+    std::cout << "Please enter contact you want to delete: ";
+    std::cin >> choise;
+    delete_contact.erase(delete_contact.begin() + (choise - 1));
+    save_contact(delete_contact);
 }
 
 /*
