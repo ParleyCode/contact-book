@@ -172,7 +172,31 @@ void create_contact(std::vector<Contact>& create_contact){
 
 */
 void edit_contact(std::vector<Contact>& edit_contact){
+    Contact contact;
+    std::string name = "";
+    std::string number = "";
+    std::string email = "";
 
+    int choise = 0;
+
+    show_contact(edit_contact);
+
+    std::cout << "Please enter which contact you want to edit: ";
+    std::cin >> choise;
+
+    std::cin.ignore(10000, '\n');
+
+    std::cout << "Enter edited name for the contact: ";
+    std::getline(std::cin, name);
+    std::cout << "Enter edited number for the contact: ";
+    std::getline(std::cin, number);
+    std::cout << "Enter edited email for the contact: ";
+    std::getline(std::cin, email);
+
+    edit_contact[choise - 1].name = name;
+    edit_contact[choise - 1].number = number;
+    edit_contact[choise - 1].email = email;
+    save_contact(edit_contact);
 }
 
 /*
