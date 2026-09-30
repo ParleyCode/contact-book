@@ -164,8 +164,17 @@ void find_contact(std::vector<Contact>& find_contact){
 
 */
 void show_contact(std::vector<Contact>& show_contact){
+    Contact contact;
+    int counter = 0;
+    char choise = '';
 
+    for(const auto& contact : show_contact){
+        ++counter;
+        std::cout << counter << ". " << contact.name << "\t" << contact.number << "\t" << contact.email << "\n"; 
+    }
 
+    std::cout << "Press any button ENTER to continue";
+    std::cin >> choise;
 }
 
 /*
