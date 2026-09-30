@@ -79,7 +79,7 @@ void load_contact(std::vector<Contact>& load_contact){
     std::string email ="";
     std::string number="";
     
-    fin.open("contact.txt");
+    fin.open("contacts.txt");
     while (std::getline(fin, name)) {
         if (name.empty()) {
             continue;
@@ -136,7 +136,25 @@ void delete_contact(std::vector<Contact>& delete_contact){
 
 */
 void create_contact(std::vector<Contact>& create_contact){
+    Contact contact;
+    std::string name = " ";
+    std::string number = " ";
+    std::string email = " ";
 
+    std::cin.ignore(10000, '\n');
+
+    std::cout << "Please enter name of the contact: ";
+    std::getline(std::cin, name);
+    std::cout << "Please enter number of the contact: ";
+    std::getline(std::cin, number);
+    std::cout << "Please enter email of the contact: ";
+    std::getline(std::cin, email);
+
+    contact.name = name;
+    contact.number = number;
+    contact.email = email;
+    create_contact.push_back(contact);
+    save_contact(create_contact);
 }
 
 /*
@@ -166,7 +184,7 @@ void find_contact(std::vector<Contact>& find_contact){
 void show_contact(std::vector<Contact>& show_contact){
     Contact contact;
     int counter = 0;
-    char choise = '';
+    char choise = ' ';
 
     for(const auto& contact : show_contact){
         ++counter;
