@@ -2,6 +2,8 @@
 #include <string>
 #include <vector>
 #include <fstream>
+#include <cctype>
+#include <algorithm>
 
 
 /*
@@ -14,11 +16,11 @@
 6.Edit contacts
 7.Find contact by name, phone, email
 8.Find contact by part of name, phone, contact.
+9.Findint is register independent
 
 
 ====TODO====
 
-1.Make finding register independent
 
 ============
 
@@ -52,6 +54,7 @@ void show_contact(std::vector<Contact>& show_contact);
 void create_contact(std::vector<Contact>& create_contact);
 void edit_contact(std::vector<Contact>& edit_contact);
 void find_contact(std::vector<Contact>& find_contact);
+std::string to_lower(std::string text);
 
 
 
@@ -220,13 +223,13 @@ void find_contact(std::vector<Contact>& find_contact){
     std::getline(std::cin, find);
     std::cout << "\n";
     for(const auto& contact : find_contact){
-        if(contact.name.find(find) != std::string::npos){
+        if(to_lower(contact.name).find(find) != std::string::npos){
               std::cout << contact.name << "\t" << contact.number << "\t" << contact.email << "\n"; 
         }
-        else if (contact.email.find(find) != std::string::npos){
+        else if (to_lower(contact.email).find(find) != std::string::npos){
             std::cout << contact.name << "\t" << contact.number << "\t" << contact.email << "\n"; 
         }
-        else if (contact.number.find(find) != std::string::npos){
+        else if (to_lower(contact.number).find(find) != std::string::npos){
             std::cout << contact.name << "\t" << contact.number << "\t" << contact.email << "\n"; 
         }
     }
@@ -252,6 +255,20 @@ void show_contact(std::vector<Contact>& show_contact){
 
     std::cout << "Press any button ENTER to continue";
     std::cin >> choise;
+}
+
+/*
+
+    Function to sort all the words to lower register
+
+*/
+std::string to_lower(std::string text){
+    std::transform(text.begin(), text.end(), text.begin(),
+        [](unsigned char c) {
+            return std::tolower(c);
+        });
+
+    return text;
 }
 
 /*
