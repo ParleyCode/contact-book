@@ -132,16 +132,29 @@ void save_contact(std::vector<Contact>& save_contact){
 void delete_contact(std::vector<Contact>& delete_contact){
     int choise = 0;
 
+    
     show_contact(delete_contact);
     if(delete_contact.empty()){
-        std::cout << "\n\nThere is no contact to delete. \n\n";
         exit;
     }
     else{
         std::cout << "Please enter contact you want to delete: ";
+        while(choise <= 0 || choise >= delete_contact.size()){
+        if(delete_contact.empty()){
+            break;
+        }
+        std::cin.clear();
+        std::cin.ignore(10000, '\n');
         std::cin >> choise;
-        delete_contact.erase(delete_contact.begin() + (choise - 1));
-        save_contact(delete_contact);
+        if(choise <= 0 && choise > delete_contact.size()){
+            std::cout << "Wanna see seg fault?";
+        }
+
+        else{
+            delete_contact.erase(delete_contact.begin() + (choise - 1));
+            save_contact(delete_contact);
+        }
+        }
     }
 
 }
@@ -185,9 +198,8 @@ void edit_contact(std::vector<Contact>& edit_contact){
     std::string email = "";
 
     int choise = 0;
-
+    if(!edit_contact.empty()){
     show_contact(edit_contact);
-
     std::cout << "Please enter which contact you want to edit: ";
     std::cin >> choise;
 
@@ -204,6 +216,12 @@ void edit_contact(std::vector<Contact>& edit_contact){
     edit_contact[choise - 1].number = number;
     edit_contact[choise - 1].email = email;
     save_contact(edit_contact);
+    }
+    else{
+        std::cout << "\n\nThere is no contacts to edit :( \n\n";
+        exit;
+    }
+
 }
 
 /*
@@ -223,17 +241,18 @@ void find_contact(std::vector<Contact>& find_contact){
     std::getline(std::cin, find);
     std::cout << "\n";
     for(const auto& contact : find_contact){
+        std::cout << "|----------------------------------------------------------------\n";
         if(to_lower(contact.name).find(find) != std::string::npos){
-              std::cout << contact.name << "\t" << contact.number << "\t" << contact.email << "\n"; 
+              std::cout << "|" <<contact.name << "\t|" << contact.number << "\t|" << contact.email << "\t|\n"; 
         }
         else if (to_lower(contact.email).find(find) != std::string::npos){
-            std::cout << contact.name << "\t" << contact.number << "\t" << contact.email << "\n"; 
+              std::cout << "|" <<contact.name << "\t|" << contact.number << "\t|" << contact.email << "\t|\n"; 
         }
         else if (to_lower(contact.number).find(find) != std::string::npos){
-            std::cout << contact.name << "\t" << contact.number << "\t" << contact.email << "\n"; 
+              std::cout << "|" <<contact.name << "\t|" << contact.number << "\t|" << contact.email << "\t|\n"; 
         }
     }
-    std::cout << "Press any key ENTER to continue.";
+    std::cout << "\nPress any key ENTER to continue.";
     std::cin >> spam;
 }
 
@@ -248,12 +267,17 @@ void show_contact(std::vector<Contact>& show_contact){
     int counter = 0;
     char choise = ' ';
 
-    for(const auto& contact : show_contact){
-        ++counter;
-        std::cout << counter << ". " << contact.name << "\t" << contact.number << "\t" << contact.email << "\n"; 
+    if(show_contact.empty()){
+        std::cout << "\nThere is no contact yet :(\n";
     }
-
-    std::cout << "Press any button ENTER to continue";
+    else{
+        for(const auto& contact : show_contact){
+            ++counter;
+            std::cout << "|-------------------------------------------------------------------------------\n";
+            std::cout << "|" << counter << ". " << contact.name << "\t|" << contact.number << "\t|" << contact.email << "\t|\n"; 
+        }
+    }
+    std::cout << "\nPress any button ENTER to continue";
     std::cin >> choise;
 }
 
