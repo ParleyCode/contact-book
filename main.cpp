@@ -9,13 +9,17 @@
 1.Save contacts to the file
 2.Load contacts from the file
 3.Show the menu
+4.Add contacts
+5.Remove contacts
+6.Edit contacts
+7.Find contact by name, phone, email
+8.Find contact by part of name, phone, contact.
+
 
 ====TODO====
-1. Add contacts
-2. Remove contacts
-3. Edit contact
-4. Find contact by name, phone, email
-5. Find contact by part of the name
+
+1.Make finding register independent
+
 ============
 
 */
@@ -205,7 +209,29 @@ void edit_contact(std::vector<Contact>& edit_contact){
 
 */
 void find_contact(std::vector<Contact>& find_contact){
+    Contact contact;
+    std::string spam = "";
+    std::string find = "";
+    std::cout << "Please enter which contact you want to find: ";
 
+    std::cin.clear();
+    std::cin.ignore(10000, '\n');
+
+    std::getline(std::cin, find);
+    std::cout << "\n";
+    for(const auto& contact : find_contact){
+        if(contact.name.find(find) != std::string::npos){
+              std::cout << contact.name << "\t" << contact.number << "\t" << contact.email << "\n"; 
+        }
+        else if (contact.email.find(find) != std::string::npos){
+            std::cout << contact.name << "\t" << contact.number << "\t" << contact.email << "\n"; 
+        }
+        else if (contact.number.find(find) != std::string::npos){
+            std::cout << contact.name << "\t" << contact.number << "\t" << contact.email << "\n"; 
+        }
+    }
+    std::cout << "Press any key ENTER to continue.";
+    std::cin >> spam;
 }
 
 /*
