@@ -241,15 +241,17 @@ void find_contact(std::vector<Contact>& find_contact){
     std::getline(std::cin, find);
     std::cout << "\n";
     for(const auto& contact : find_contact){
-        std::cout << "|----------------------------------------------------------------\n";
         if(to_lower(contact.name).find(find) != std::string::npos){
-              std::cout << "|" <<contact.name << "\t|" << contact.number << "\t|" << contact.email << "\t|\n"; 
+                 std::cout << "|----------------------------------------------------------------\n";
+                 std::cout << "|" <<contact.name << "\t|" << contact.number << "\t|" << contact.email << "\t|\n"; 
         }
         else if (to_lower(contact.email).find(find) != std::string::npos){
-              std::cout << "|" <<contact.name << "\t|" << contact.number << "\t|" << contact.email << "\t|\n"; 
+            std::cout << "|----------------------------------------------------------------\n";
+            std::cout << "|" <<contact.name << "\t|" << contact.number << "\t|" << contact.email << "\t|\n"; 
         }
         else if (to_lower(contact.number).find(find) != std::string::npos){
-              std::cout << "|" <<contact.name << "\t|" << contact.number << "\t|" << contact.email << "\t|\n"; 
+            std::cout << "|----------------------------------------------------------------\n";
+            std::cout << "|" <<contact.name << "\t|" << contact.number << "\t|" << contact.email << "\t|\n"; 
         }
     }
     std::cout << "\nPress any key ENTER to continue.";
